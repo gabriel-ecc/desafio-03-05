@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./assets/styles/style.css" />
+    <script defer src="./assets/js/index.js"></script>
+    <title>Todo List</title>
+</head>
+<body class="cuerpo">
+    <h1>Todo List</h1>
+    <hr>
+    <section class="ingreso">
+        <p>Nueva tarea</p>
+        <input type="text" id="texto-tarea">
+        <button class="btn-agregar" id="btn-agregar">Agregar</button>
+    </section>
+    <section class="tareas">
+        <div class="resumen">
+            <p id="tareas-total"></p>
+            <p id="tareas-realizadas"></p>
+        </div>
+        <div class="lista">
+            <table id="tabla-estado-tareas" class="tabla-tareas">
+                <caption>Información de tareas</caption>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Tarea</th>
+                    <th>Estado</th>
+                    <th>Eliminar</th>
+                  </tr>
+                </thead>
+                <tbody id="tabla-datos">
+                  <!-- <tr>
+                    <td>1</td>
+                    <td>Hola Mundo</td>
+                    <td><input type="checkbox" checked></td>
+                    <td><i class="fa-solid fa-delete-left"></i></td>
+                  </tr> -->
+                </tbody>
+              </table>
+        </div>
+    </section>
+    
+</body>
+</html>
