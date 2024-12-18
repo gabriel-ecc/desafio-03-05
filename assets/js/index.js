@@ -9,48 +9,53 @@ let cantidadTareas = 0;
 let listaTareas = [];
 
 btnAgregar.addEventListener("click",()=>{
-    cantidadTareas++;
-    let _nuevaTarea = [{id: Number(cantidadTareas), nombre: tareaDescripcion.value, terminada: false}]
-    listaTareas = listaTareas.concat(_nuevaTarea);
+    
+    
+    let _nuevaTarea = {id: Number(definirNuevoId()), nombre: tareaDescripcion.value, terminada: false}
+    listaTareas.push(_nuevaTarea);
     tareaDescripcion.value = "";
-    armaTabla();
+    contruyeTabla(listaTareas);
     mostrarResumenTareas();
-    console.log("ingreso ",listaTareas);
 });
-
 
 
 const imprimeCheck = (estado)=>{
     return estado ? "checked":"";
 };
 
-const agregaFila = (dato) =>{
-    let _contenidoHtml = `<tr class="fila-tarea" id="fila-${dato.id}">
+const limpiaTabla = () => {
+    tablaDatos.value = "";
+};
+
+const contruyeTabla = (lista) =>{
+    const listaO = lista.sort((x, y) => x.id - y.id);
+    let _contenidoHtml = ""
+    for(dato of listaO){
+        _contenidoHtml += `<tr class="fila-tarea" id="fila-${dato.id}">
                             <td>${dato.id}</td>
                             <td>${dato.nombre}</td>
                             <td><input type="checkbox" ${imprimeCheck(dato.terminada)} OnClick="updateEstadoTarea(${dato.id})"></td>
-                            <td><i class="fa-solid fa-delete-left"></i></td>
+                            <td><button OnClick="borraElemento(${dato.id})"><i class="fa-solid fa-delete-left"></i></button></td>
                         </tr>`;
+    }
     tablaDatos.innerHTML = _contenidoHtml;
 };
 
 const updateEstadoTarea = (_id) => {
-    console.log(listaTareas);
     const _original = listaTareas.filter(x => x.id === _id);
     const _estado = _original[0].terminada ? false : true;
-    let _updateTarea = [{id: _original[0].id, nombre: _original[0].nombre, terminada: _estado}]
-    console.log(_updateTarea);
+    let _updateTarea = {id: _original[0].id, nombre: _original[0].nombre, terminada: _estado}
     borraElemento(_id);
-    console.log(listaTareas);
-    listaTareas = listaTareas.concat(_updateTarea);
-    console.log(listaTareas);
-    armaTabla();
+    listaTareas.push(_updateTarea);
+    contruyeTabla(listaTareas);
     mostrarResumenTareas();
 };
 
 const borraElemento = (_id) => {
-    const _indice = _id - 1;
-    listaTareas = listaTareas.splice(_indice,1);
+    const indice = listaTareas.findIndex(x => x.id === _id);
+    listaTareas.splice(indice,1);
+    contruyeTabla(listaTareas);
+    mostrarResumenTareas();
 };
 
 const mostrarResumenTareas = () => {
@@ -58,6 +63,12 @@ const mostrarResumenTareas = () => {
     resumenTareasTotal.innerHTML = `Total: ${listaTareas.length}`;
     resumenTareasRealizadas.innerHTML = `Realizadas: ${_tareasRealizadas}`;
 };
+
+const definirNuevoId = () => {
+    if (listaTareas.length === 0 ) return 1;
+    const valores = listaTareas.map(obj => obj.id);
+    return nuevoId = Math.max(...valores) + 1 ;
+;}
 
 mostrarResumenTareas();
 
