@@ -4,7 +4,7 @@ const tablaDatos = document.querySelector("#tabla-datos");
 const resumenTareasTotal = document.querySelector("#tareas-total");
 const resumenTareasRealizadas = document.querySelector("#tareas-realizadas");
 
-let listaTareas = [];
+let listaTareas = [{id:1, nombre: "Planificar", terminada: true}, {id:2, nombre: "Desarrollar", terminada: false},{id:3, nombre: "Certificar", terminada: false}];
 
 btnAgregar.addEventListener("click",()=>{
     let _nuevaTarea = {id: Number(definirNuevoId()), nombre: tareaDescripcion.value, terminada: false}
@@ -63,5 +63,6 @@ const definirNuevoId = () => {
     return nuevoId = Math.max(...valores) + 1 ;
 };
 
+contruyeTabla(listaTareas);
 mostrarResumenTareas();
 
