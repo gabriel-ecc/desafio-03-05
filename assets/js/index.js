@@ -24,7 +24,7 @@ const contruyeTabla = (lista) =>{
     for(dato of listaO){
         _contenidoHtml += `<tr class="fila-tarea" id="fila-${dato.id}">
                             <td>${dato.id}</td>
-                            <td>${dato.nombre}</td>
+                            <td class="columna-nombre-tarea">${dato.nombre}</td>
                             <td><input type="checkbox" ${imprimeCheck(dato.terminada)} OnClick="updateEstadoTarea(${dato.id})"></td>
                             <td><i class="fa-solid fa-delete-left" OnClick="borraElemento(${dato.id},true)"></i></td>
                         </tr>`;

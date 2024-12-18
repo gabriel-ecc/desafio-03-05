@@ -13,21 +13,24 @@
     <hr>
     <section class="ingreso">
         <p>Nueva tarea</p>
-        <input type="text" id="texto-tarea">
-        <button class="btn-agregar" id="btn-agregar">Agregar</button>
+        <div class="ingreso-tarea">
+          <input type="text" id="texto-tarea" placeholder="Ingrese tarea">
+          <button class="btn-agregar" id="btn-agregar">Agregar</button>
+        </div>
     </section>
     <section class="tareas">
         <div class="resumen">
-            <p id="tareas-total"></p>
-            <p id="tareas-realizadas"></p>
+          <p class="resumen-titulo">Resumen</p>
+          <p id="tareas-total"></p>
+          <p id="tareas-realizadas"></p>
         </div>
         <div class="lista">
             <table id="tabla-estado-tareas" class="tabla-tareas">
-                <caption>Información de tareas</caption>
+                <caption class="resumen-titulo">Información de tareas</caption>
                 <thead>
                   <tr>
                     <th>ID</th>
-                    <th>Tarea</th>
+                    <th class="columna-nombre-tarea">Tarea</th>
                     <th>Estado</th>
                     <th>Eliminar</th>
                   </tr>
