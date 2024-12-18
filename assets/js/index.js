@@ -1,16 +1,12 @@
 const btnAgregar = document.querySelector("#btn-agregar");
 const tareaDescripcion = document.querySelector("#texto-tarea");
-const tablaTareas = document.querySelector("#tabla-estado-tareas");
 const tablaDatos = document.querySelector("#tabla-datos");
 const resumenTareasTotal = document.querySelector("#tareas-total");
 const resumenTareasRealizadas = document.querySelector("#tareas-realizadas");
 
-let cantidadTareas = 0;
 let listaTareas = [];
 
 btnAgregar.addEventListener("click",()=>{
-    
-    
     let _nuevaTarea = {id: Number(definirNuevoId()), nombre: tareaDescripcion.value, terminada: false}
     listaTareas.push(_nuevaTarea);
     tareaDescripcion.value = "";
@@ -18,13 +14,8 @@ btnAgregar.addEventListener("click",()=>{
     mostrarResumenTareas();
 });
 
-
 const imprimeCheck = (estado)=>{
     return estado ? "checked":"";
-};
-
-const limpiaTabla = () => {
-    tablaDatos.value = "";
 };
 
 const contruyeTabla = (lista) =>{
@@ -35,7 +26,7 @@ const contruyeTabla = (lista) =>{
                             <td>${dato.id}</td>
                             <td>${dato.nombre}</td>
                             <td><input type="checkbox" ${imprimeCheck(dato.terminada)} OnClick="updateEstadoTarea(${dato.id})"></td>
-                            <td><button OnClick="borraElemento(${dato.id})"><i class="fa-solid fa-delete-left"></i></button></td>
+                            <td><i class="fa-solid fa-delete-left" OnClick="borraElemento(${dato.id},true)"></i></td>
                         </tr>`;
     }
     tablaDatos.innerHTML = _contenidoHtml;
@@ -51,11 +42,13 @@ const updateEstadoTarea = (_id) => {
     mostrarResumenTareas();
 };
 
-const borraElemento = (_id) => {
+const borraElemento = (_id, update = false) => {
     const indice = listaTareas.findIndex(x => x.id === _id);
     listaTareas.splice(indice,1);
-    contruyeTabla(listaTareas);
-    mostrarResumenTareas();
+    if(update){
+        contruyeTabla(listaTareas);
+        mostrarResumenTareas();
+    }
 };
 
 const mostrarResumenTareas = () => {
@@ -68,7 +61,7 @@ const definirNuevoId = () => {
     if (listaTareas.length === 0 ) return 1;
     const valores = listaTareas.map(obj => obj.id);
     return nuevoId = Math.max(...valores) + 1 ;
-;}
+};
 
 mostrarResumenTareas();
 
